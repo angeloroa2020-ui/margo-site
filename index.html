@@ -4,155 +4,189 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MarGo</title>
-<meta name="description" content="A MarGo conecta turistas a barqueiros verificados no litoral brasileiro. Reserva com data, perfil com embarcação e avaliações reais. Aplicativo em construção.">
+<meta name="description" content="A MarGo conecta turistas a barqueiros verificados do litoral brasileiro. Reserva com data, perfil com embarcação e avaliações reais. Aplicativo em construção.">
 <link rel="icon" href="assets/icon.png">
 <meta property="og:title" content="MarGo — Passeios que conectam você ao melhor do mar">
 <meta property="og:description" content="Marketplace de passeios náuticos. Barqueiro verificado, reserva com data e avaliação real.">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="fonts/instrument-serif-latin-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-latin-400-normal.woff2" crossorigin>
 <style>
+@font-face{font-family:'Instrument Serif';src:url('fonts/instrument-serif-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Instrument Serif';src:url('fonts/instrument-serif-latin-400-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Jakarta';src:url('fonts/plus-jakarta-sans-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Jakarta';src:url('fonts/plus-jakarta-sans-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Jakarta';src:url('fonts/plus-jakarta-sans-latin-700-normal.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Jakarta';src:url('fonts/plus-jakarta-sans-latin-800-normal.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
+
 :root{
   color-scheme:dark;
-  --p:#00B4B4; --p2:#FF8A00; --deep:#0A2540; --bg:#04111F; --tx:#F5F7FA; --onp:#04222c;
-  --s1:#081B2E; --line:#16304A; --mut:#9FB3C6;
-  --r:20px; --nav:72px;
-  --fd:'Barlow Condensed','Arial Narrow',system-ui,sans-serif;
-  --fb:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --p:#00B4B4; --p2:#FF8A00; --bg:#04111F; --tx:#F2F6FA; --onp:#042028;
+  --s1:#07192B; --line:#153049; --mut:#9DB2C6;
+  --nav:68px;
+  --fd:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --fb:'Jakarta',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
-h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:.96;letter-spacing:.4px;margin:0;text-transform:uppercase}
-h1{font-size:clamp(40px,5.2vw,66px)}
-h2{font-size:clamp(32px,4.4vw,56px)}
-h3{font-size:clamp(18px,2vw,23px);letter-spacing:.5px}
-p{margin:0}
 a{color:inherit}
-.wrap{width:min(1160px,calc(100% - 40px));margin-inline:auto}
-.eyebrow{display:block;font-weight:800;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--p);margin-bottom:14px}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--fd);font-weight:400;line-height:1.02;letter-spacing:-.01em}
+h1{font-size:clamp(44px,6.4vw,88px)}
+h2{font-size:clamp(38px,6vw,76px)}
+h3{font-size:clamp(21px,2.2vw,27px);line-height:1.15}
+em{font-style:italic;color:var(--p)}
+
+.wrap{width:min(1140px,calc(100% - 40px));margin-inline:auto}
+.narrow{width:min(760px,calc(100% - 40px));margin-inline:auto}
+.mid{text-align:center}
 .mut{color:var(--mut)}
-.pill{display:inline-flex;align-items:center;gap:9px;border:1.5px solid var(--p);color:var(--p);border-radius:999px;padding:7px 16px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-.pill i{width:7px;height:7px;border-radius:50%;background:var(--p);display:block}
+.lead{font-size:clamp(17px,1.5vw,20px);color:#BFD1E0}
+
+/* etiqueta de capítulo */
+.chap{display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:800;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--p)}
+.chap::before,.chap::after{content:'';width:28px;height:1px;background:var(--p);opacity:.5}
+
+.pill{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(0,180,180,.5);color:var(--p);
+  border-radius:999px;padding:7px 17px;font-size:11.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.pill i{width:6px;height:6px;border-radius:50%;background:var(--p);display:block}
 @media(prefers-reduced-motion:no-preference){.pill i{animation:blink 2.6s infinite}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:15px 28px;font-weight:700;font-size:15.5px;text-decoration:none;border:1.5px solid transparent;transition:transform .18s,border-color .2s,color .2s,background .2s}
-.btn:hover{transform:translateY(-2px)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;
+  padding:15px 30px;font-weight:700;font-size:15px;text-decoration:none;border:1px solid transparent;
+  transition:transform .25s cubic-bezier(.2,.7,.3,1),background .25s,border-color .25s,color .25s}
+.btn:hover{transform:translateY(-3px)}
 .btn-p{background:var(--p);color:var(--onp)}
-.btn-p:hover{background:#13c9c9}
+.btn-p:hover{background:#17cccc}
 .btn-g{border-color:var(--line);color:var(--tx)}
 .btn-g:hover{border-color:var(--p);color:var(--p)}
-.cta{display:flex;gap:13px;flex-wrap:wrap;margin-top:32px}
+.cta{display:flex;gap:13px;flex-wrap:wrap;justify-content:center;margin-top:34px}
 
-/* marca */
-.logo{height:38px;width:auto;background:#fff;border-radius:11px;padding:6px 10px}
+.logo{height:36px;width:auto;background:#fff;border-radius:10px;padding:5px 9px}
 
-/* nav */
-header{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid transparent;transition:border-color .25s}
-header.on{border-color:var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;height:var(--nav)}
-.nav menu{display:flex;gap:26px;font-size:14.5px;font-weight:600;margin:0;padding:0;list-style:none}
-.nav menu a{text-decoration:none;color:var(--mut);transition:color .2s}
-.nav menu a:hover{color:var(--tx)}
-.nav .btn{padding:11px 20px;font-size:14.5px}
+/* cabeçalho */
+header{position:fixed;inset:0 0 auto;z-index:50;height:var(--nav);display:flex;align-items:center;
+  background:rgba(4,17,31,0);border-bottom:1px solid transparent;transition:background .35s,border-color .35s,backdrop-filter .35s}
+header.on{background:rgba(4,17,31,.97);border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%}
+.nav menu{display:flex;gap:28px;font-size:14px;font-weight:600;margin:0;padding:0;list-style:none}
+.nav menu a{text-decoration:none;color:var(--mut);transition:color .2s;position:relative}
+.nav menu a::after{content:'';position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:var(--p);transition:right .3s}
+.nav menu a:hover{color:var(--tx)} .nav menu a:hover::after{right:0}
+.nav .btn{padding:10px 20px;font-size:13.5px}
 @media(max-width:980px){.nav menu{display:none}}
-@media(max-width:560px){.nav .btn{padding:10px 15px;font-size:13px}.logo{height:34px}}
+@media(max-width:520px){.nav .btn{padding:9px 15px;font-size:12.5px}.logo{height:32px}}
 
-/* hero */
-.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);padding:0}
-.hero .sea{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
-.hero::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,var(--bg) 8%,rgba(4,17,31,.72) 46%,rgba(4,17,31,.35) 100%),
-             linear-gradient(0deg,var(--bg) 2%,transparent 40%)}
-.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
-  gap:48px;align-items:center;padding:60px 0 68px}
-.hero h1{margin:18px 0 20px;max-width:17ch}
-.hero h1 em{font-style:normal;color:var(--p)}
-.hero .lead{font-size:19px;color:#C7D6E4;max-width:46ch}
-.heroshot{justify-self:center;width:min(290px,80%);border-radius:28px;border:1px solid var(--line);
-  box-shadow:0 40px 80px rgba(0,0,0,.6)}
-@media(prefers-reduced-motion:no-preference){.heroshot{animation:bob 8s ease-in-out infinite}}
-@keyframes bob{0%,100%{transform:translateY(-9px)}50%{transform:translateY(9px)}}
-@media(max-width:860px){
-  .hero .wrap{grid-template-columns:1fr;gap:40px;padding:56px 0 64px}
-  .hero h1{max-width:none}
-  .heroshot{width:min(250px,70%)}
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;padding:calc(var(--nav) + 40px) 0 60px;text-align:center}
+.hero-bg{position:absolute;inset:-8% 0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.52}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 55% at 50% 45%,transparent 0%,rgba(4,17,31,.55) 65%,var(--bg) 100%),
+             linear-gradient(0deg,var(--bg) 1%,transparent 32%)}
+.hero .narrow{position:relative;z-index:2;width:min(1000px,calc(100% - 40px))}
+.hero h1{margin:22px auto 24px}
+.hero .lead{margin-inline:auto;max-width:48ch}
+.scroll-cue{position:absolute;left:50%;top:calc(100svh - 74px);transform:translateX(-50%);z-index:3;
+  font-size:10.5px;letter-spacing:.3em;font-weight:800;text-transform:uppercase;color:var(--mut);
+  display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-cue b{display:block;width:1px;height:38px;background:linear-gradient(var(--p),transparent)}
+@media(prefers-reduced-motion:no-preference){.scroll-cue b{animation:cue 2.2s ease-in-out infinite}}
+@keyframes cue{0%,100%{transform:scaleY(.35);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+
+/* celular do hero, sobe com a rolagem */
+.hero-phone{position:relative;z-index:2;width:min(260px,62%);margin:44px auto -140px;
+  border-radius:26px;border:1px solid var(--line);box-shadow:0 50px 90px rgba(0,0,0,.65)}
+
+/* ---------- seções ---------- */
+section{padding:clamp(80px,11vh,130px) 0;scroll-margin-top:var(--nav);position:relative}
+.head{margin-bottom:clamp(44px,6vh,70px)}
+.head h2{margin:20px auto 18px;max-width:17ch}
+.head p{margin-inline:auto;max-width:54ch}
+
+/* linha de respiro */
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+
+/* O problema — lista editorial, não grade de cartões */
+.probs{display:grid;gap:0;max-width:880px;margin-inline:auto}
+.prob{display:grid;grid-template-columns:76px 1fr;gap:26px;align-items:start;
+  padding:30px 0;border-top:1px solid var(--line);text-align:left}
+.prob:last-child{border-bottom:1px solid var(--line)}
+.prob .n{font-family:var(--fd);font-size:40px;line-height:1;color:var(--p);opacity:.55}
+.prob h3{margin-bottom:6px}
+.prob p{color:var(--mut);font-size:15.5px}
+@media(max-width:600px){.prob{grid-template-columns:52px 1fr;gap:18px;padding:24px 0}.prob .n{font-size:30px}}
+
+/* Como funciona — trilha com progresso */
+.track{position:relative;max-width:980px;margin-inline:auto}
+.track::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line)}
+.track .fill{position:absolute;left:50%;top:0;width:1px;height:0;background:var(--p);box-shadow:0 0 14px var(--p)}
+.stp{position:relative;padding:34px 0;display:grid;grid-template-columns:1fr 92px 1fr;align-items:center;gap:10px}
+.stp .dot{grid-column:2;grid-row:1;justify-self:center;align-self:center;width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--p);position:relative;z-index:2;transition:background .4s,box-shadow .4s}
+.stp.lit .dot{background:var(--p);box-shadow:0 0 0 6px rgba(0,180,180,.16)}
+.stp .box{max-width:330px;align-self:center;grid-row:1}
+.stp.l .box{grid-column:1;text-align:right;justify-self:end}
+.stp.r .box{grid-column:3;text-align:left;justify-self:start}
+.stp .k{font-size:11.5px;letter-spacing:.24em;font-weight:800;color:var(--p2);text-transform:uppercase}
+.stp h3{margin:8px 0 6px}
+.stp p{color:var(--mut);font-size:15px}
+@media(max-width:700px){
+  .track::before,.track .fill{left:7px}
+  .stp{grid-template-columns:16px 1fr;gap:20px;padding:24px 0}
+  .stp .dot{grid-column:1;justify-self:start}
+  .stp.l .box,.stp.r .box{grid-column:2;text-align:left;justify-self:start;max-width:none}
 }
 
-/* seções */
-section{padding:92px 0;scroll-margin-top:var(--nav)}
-.lede{max-width:60ch;margin-bottom:46px}
-.lede h2{margin-bottom:16px}
+/* faixa da lancha, fixada e animada */
+.cine{position:relative;height:230vh}
+.cine .stick{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:end center;padding-bottom:13vh}
+.cine .shot{position:absolute;inset:0}
+.cine .shot img{width:100%;height:100%;object-fit:cover}
+.cine .veil{position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0,rgba(4,17,31,.18) 24%,rgba(4,17,31,.58) 74%,var(--bg) 100%)}
+.cine .say{position:relative;z-index:2;text-align:center;max-width:16ch;margin-inline:auto;
+  font-family:var(--fd);font-size:clamp(32px,5.2vw,64px);line-height:1.04;text-shadow:0 4px 30px rgba(4,17,31,.9)}
 
-/* cartões */
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{background:var(--s1);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;display:flex;flex-direction:column}
-.card .n{font-family:var(--fd);font-size:40px;color:#1C6E73;line-height:1;margin-bottom:12px}
-.card h3{margin-bottom:9px;min-height:2.1em;display:flex;align-items:flex-end}
-.card p{font-size:14.5px;color:var(--mut)}
-@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}.card h3{min-height:0}}
-@media(max-width:520px){.cards{grid-template-columns:1fr}}
-
-/* passos */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--s1)}
-.step{padding:28px 24px;border-right:1px solid var(--line)}
-.step:last-child{border-right:0}
-.step .k{font-family:var(--fd);font-size:15px;letter-spacing:.2em;color:var(--p2);margin-bottom:9px}
-.step h3{margin-bottom:7px}
-.step p{font-size:14.5px;color:var(--mut)}
-@media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}
-  .step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid var(--line)}}
-@media(max-width:520px){.steps{grid-template-columns:1fr}
-  .step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}}
-.onb{margin-top:26px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-
-/* blocos com telas */
-.split{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:56px;align-items:center}
-.split.inv .txt{order:2}
-.feat{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:15px}
-.feat li{display:flex;gap:12px;font-size:16px;color:var(--mut)}
-.feat b{color:var(--tx);font-weight:700}
-.feat i{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--p);margin-top:9px}
-.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
-.shots img{border-radius:18px;border:1px solid var(--line);box-shadow:0 22px 44px rgba(0,0,0,.45)}
-.shots img:nth-child(2){margin-top:26px}
-@media(max-width:860px){.split{grid-template-columns:1fr;gap:34px}.split.inv .txt{order:0}
-  .shots{max-width:520px}.shots img:nth-child(2){margin-top:0}}
-
-/* faixa da lancha */
-.band{position:relative;height:min(58vh,440px);overflow:hidden}
-.band img{width:100%;height:100%;object-fit:cover;opacity:.9}
-.band::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,var(--bg) 0,transparent 22%,transparent 72%,var(--bg) 100%)}
-.band span{position:absolute;left:0;right:0;bottom:7%;text-align:center;z-index:2;margin:0;
-  text-shadow:0 2px 14px rgba(4,17,31,.95)}
+/* telas do app */
+.fan{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,20px);
+  max-width:720px;margin:0 auto}
+.fan img{border-radius:16px;border:1px solid var(--line);box-shadow:0 24px 48px rgba(0,0,0,.5)}
 
 /* modelo */
-.modelo{text-align:center;padding:96px 0}
-.modelo h2{font-size:clamp(36px,5.8vw,74px);color:var(--p);max-width:16ch;margin:0 auto}
-.modelo p{margin:26px auto 0;font-size:19px;color:var(--mut);max-width:56ch}
+.modelo{text-align:center}
+.modelo h2{color:var(--p);max-width:15ch;margin:22px auto 0;font-size:clamp(40px,7vw,92px)}
+.modelo p{margin:28px auto 0;max-width:56ch;color:var(--mut);font-size:clamp(16px,1.5vw,19px)}
 
 /* costa */
 .costa{text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.costa .num{font-family:var(--fd);font-size:clamp(62px,11vw,142px);line-height:.9;color:var(--p2)}
-.costa small{display:block;font-size:12.5px;letter-spacing:.24em;color:var(--mut);font-weight:700;margin-top:12px}
-.costa p{max-width:58ch;margin:26px auto 0;color:var(--mut);font-size:18px}
+.costa .num{font-family:var(--fd);font-size:clamp(66px,13vw,170px);line-height:.92;color:var(--p2)}
+.costa .num small{display:block;font-family:var(--fb);font-size:11.5px;letter-spacing:.26em;
+  color:var(--mut);font-weight:800;margin-top:16px}
+.costa p{max-width:56ch;margin:28px auto 0;color:var(--mut)}
 
 /* final */
-.final{text-align:center;background:var(--s1);border:1px solid var(--line);border-radius:28px;padding:72px 30px}
-.final h2{margin:18px auto 18px;max-width:18ch}
-.final p{color:var(--mut);max-width:52ch;margin-inline:auto}
-.final .cta{justify-content:center}
+.final{text-align:center;max-width:720px;margin-inline:auto}
+.final h2{margin:22px auto 20px;max-width:14ch}
+.final p{color:var(--mut);max-width:50ch;margin-inline:auto}
 
-footer{border-top:1px solid var(--line);padding:40px 0 52px;color:var(--mut);font-size:14.5px}
-.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer{border-top:1px solid var(--line);padding:40px 0 54px;color:var(--mut);font-size:14px;text-align:center}
+.foot{display:flex;flex-direction:column;align-items:center;gap:16px}
 
-/* revelação */
+/* revelações */
 @media(prefers-reduced-motion:no-preference){
-  .rev{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-  .rev.in{opacity:1;transform:none}
+  .ln{display:block;overflow:hidden}
+  .ln>span{display:block;transform:translateY(105%);transition:transform .95s cubic-bezier(.16,1,.3,1)}
+  .ln.in>span{transform:none}
+  .up{opacity:0;transform:translateY(26px);transition:opacity .85s ease,transform .85s cubic-bezier(.16,1,.3,1)}
+  .up.in{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -174,71 +208,71 @@ footer{border-top:1px solid var(--line);padding:40px 0 52px;color:var(--mut);fon
 <main>
 
 <section class="hero">
-  <img class="sea" src="assets/sea.webp" alt="" aria-hidden="true">
-  <div class="wrap">
-    <div>
-      <span class="pill"><i></i> Aplicativo em construção</span>
-      <h1>Passeios que conectam você ao <em>melhor do mar</em></h1>
-      <p class="lead">A MarGo liga turistas e moradores a barqueiros verificados do litoral brasileiro. Perfil com embarcação, avaliações reais e reserva com data — sem depender de indicação.</p>
-      <div class="cta">
-        <a class="btn btn-p" href="#contato">Sou barqueiro, quero entrar</a>
-        <a class="btn btn-g" href="#funciona">Ver como funciona</a>
-      </div>
+  <div class="hero-bg" id="heroBg"><img src="assets/sea.webp" alt="" aria-hidden="true"></div>
+  <div class="narrow">
+    <span class="pill up"><i></i> Aplicativo em construção</span>
+    <h1>
+      <span class="ln"><span>Passeios que conectam</span></span>
+      <span class="ln"><span>você ao <em>melhor do mar</em></span></span>
+    </h1>
+    <p class="lead up">A MarGo liga turistas e moradores a barqueiros verificados do litoral brasileiro. Perfil com embarcação, avaliações reais e reserva com data — sem depender de indicação.</p>
+    <div class="cta up">
+      <a class="btn btn-p" href="#contato">Sou barqueiro, quero entrar</a>
+      <a class="btn btn-g" href="#funciona">Ver como funciona</a>
     </div>
-    <img class="heroshot" src="assets/cliente-home.webp" width="460" height="889" alt="Tela inicial do aplicativo MarGo">
+    <img class="hero-phone" id="heroPhone" src="assets/cliente-home.webp" width="460" height="889" alt="Tela inicial do aplicativo MarGo">
   </div>
+  <div class="scroll-cue"><span>role</span><b></b></div>
 </section>
 
 <section id="problema">
-  <div class="wrap">
-    <div class="lede rev">
-      <span class="eyebrow">O problema</span>
-      <h2>O passeio existe. O acesso, não.</h2>
-      <p class="mut">Centenas de ilhas, praias e destinos náuticos. O que falta não é mar — é um lugar onde quem quer navegar encontre quem leva.</p>
+  <div class="wrap mid">
+    <div class="head">
+      <span class="chap up">Capítulo 01 — O problema</span>
+      <h2><span class="ln"><span>O passeio existe.</span></span><span class="ln"><span><em>O acesso, não.</em></span></span></h2>
+      <p class="lead up">Centenas de ilhas, praias e destinos náuticos. O que falta não é mar — é um lugar onde quem quer navegar encontre quem leva.</p>
     </div>
-    <div class="cards">
-      <article class="card rev"><div class="n">01</div><h3>Sem vitrine</h3><p>O barqueiro autônomo não tem onde mostrar a embarcação, os passeios e o que já fez.</p></article>
-      <article class="card rev"><div class="n">02</div><h3>Na indicação</h3><p>O turista descobre pelo quiosque, pelo hotel ou pelo grupo de WhatsApp. Ou não descobre.</p></article>
-      <article class="card rev"><div class="n">03</div><h3>Preço no escuro</h3><p>Sem referência, cada combinação começa do zero e ninguém sabe o que é caro.</p></article>
-      <article class="card rev"><div class="n">04</div><h3>Zero histórico</h3><p>Quem atende bem não acumula reputação. Quem atende mal segue igual.</p></article>
+    <div class="probs">
+      <div class="prob up"><div class="n">01</div><div><h3>Sem vitrine</h3><p>O barqueiro autônomo não tem onde mostrar a embarcação, os passeios e o que já fez.</p></div></div>
+      <div class="prob up"><div class="n">02</div><div><h3>Na indicação</h3><p>O turista descobre pelo quiosque, pelo hotel ou pelo grupo de WhatsApp. Ou não descobre.</p></div></div>
+      <div class="prob up"><div class="n">03</div><div><h3>Preço no escuro</h3><p>Sem referência, cada combinação começa do zero e ninguém sabe o que é caro.</p></div></div>
+      <div class="prob up"><div class="n">04</div><div><h3>Zero histórico</h3><p>Quem atende bem não acumula reputação. Quem atende mal segue igual.</p></div></div>
     </div>
   </div>
 </section>
 
 <section id="funciona">
-  <div class="wrap">
-    <div class="lede rev">
-      <span class="eyebrow">Como funciona</span>
-      <h2>Quatro passos. Nenhum mistério.</h2>
+  <div class="wrap mid">
+    <div class="head">
+      <span class="chap up">Capítulo 02 — Como funciona</span>
+      <h2><span class="ln"><span>Quatro passos.</span></span><span class="ln"><span><em>Nenhum mistério.</em></span></span></h2>
     </div>
-    <div class="steps rev">
-      <div class="step"><div class="k">01</div><h3>Busque</h3><p>Encontre barqueiros disponíveis na sua região, por destino ou categoria.</p></div>
-      <div class="step"><div class="k">02</div><h3>Solicite</h3><p>Envie o pedido com a data, o número de pessoas e um recado.</p></div>
-      <div class="step"><div class="k">03</div><h3>Confirme</h3><p>O barqueiro confirma e combina com você os detalhes do passeio.</p></div>
-      <div class="step"><div class="k">04</div><h3>Aproveite</h3><p>Vá ao ponto de embarque e curta o mar. Depois, deixe sua avaliação.</p></div>
+    <div class="track" id="track">
+      <div class="fill" id="trackFill"></div>
+      <div class="stp l"><div class="box"><div class="k">Passo 01</div><h3>Busque</h3><p>Encontre barqueiros disponíveis na sua região, por destino ou categoria.</p></div><div class="dot"></div></div>
+      <div class="stp r"><div class="dot"></div><div class="box"><div class="k">Passo 02</div><h3>Solicite</h3><p>Envie o pedido com a data, o número de pessoas e um recado.</p></div></div>
+      <div class="stp l"><div class="box"><div class="k">Passo 03</div><h3>Confirme</h3><p>O barqueiro confirma e combina com você os detalhes do passeio.</p></div><div class="dot"></div></div>
+      <div class="stp r"><div class="dot"></div><div class="box"><div class="k">Passo 04</div><h3>Aproveite</h3><p>Vá ao ponto de embarque e curta o mar. Depois, deixe sua avaliação.</p></div></div>
     </div>
-    <div class="onb rev"><img src="assets/onboarding.webp" width="1100" height="510" alt="Telas de abertura do aplicativo MarGo"></div>
   </div>
 </section>
 
-<div class="band">
-  <img src="assets/boat.webp" alt="Lancha cortando o mar aberto">
-  <span class="eyebrow">O app vira o passeio</span>
+<div class="cine" id="cine">
+  <div class="stick">
+    <div class="shot" id="cineShot"><img src="assets/boat.webp" alt="Lancha cortando o mar aberto"></div>
+    <div class="veil"></div>
+    <p class="say" id="cineSay">O app vira <em>o passeio</em></p>
+  </div>
 </div>
 
 <section id="cliente">
-  <div class="wrap split">
-    <div class="txt rev">
-      <span class="eyebrow">Para quem quer navegar</span>
-      <h2>Escolher o barqueiro virou possível</h2>
-      <ul class="feat">
-        <li><i></i><div><b>Perfil completo.</b> Embarcação, capacidade, cidade de operação e documentação informada.</div></li>
-        <li><i></i><div><b>Avaliações reais.</b> Estrelas e comentários de quem já fez o passeio.</div></li>
-        <li><i></i><div><b>Reserva com data.</b> Dia, número de pessoas e mensagem direta para o barqueiro.</div></li>
-        <li><i></i><div><b>Tudo organizado.</b> Próximas, em andamento e histórico, no mesmo lugar.</div></li>
-      </ul>
+  <div class="wrap mid">
+    <div class="head">
+      <span class="chap up">Capítulo 03 — Para quem quer navegar</span>
+      <h2><span class="ln"><span>Escolher o barqueiro</span></span><span class="ln"><span><em>virou possível</em></span></span></h2>
+      <p class="lead up">Perfil com embarcação, capacidade e documentação informada. Avaliações de quem já foi. Reserva com dia, número de pessoas e recado direto.</p>
     </div>
-    <div class="shots rev">
+    <div class="fan" id="fan1">
       <img src="assets/cliente-explorar.webp" width="460" height="884" alt="Explorar passeios">
       <img src="assets/cliente-barqueiros.webp" width="460" height="889" alt="Barqueiros disponíveis">
       <img src="assets/cliente-reservas.webp" width="460" height="882" alt="Minhas reservas">
@@ -247,18 +281,13 @@ footer{border-top:1px solid var(--line);padding:40px 0 52px;color:var(--mut);fon
 </section>
 
 <section id="barqueiro">
-  <div class="wrap split inv">
-    <div class="txt rev">
-      <span class="eyebrow">Para quem leva</span>
-      <h2>O barco parado passa a ter agenda</h2>
-      <ul class="feat">
-        <li><i></i><div><b>Solicitações em tempo real.</b> Cliente, data, pessoas e recado — aceita ou recusa num toque.</div></li>
-        <li><i></i><div><b>Agenda do mês.</b> Confirmadas e pendentes, dia a dia, sem caderno.</div></li>
-        <li><i></i><div><b>Condições do mar.</b> Vento, onda e temperatura do dia antes de sair.</div></li>
-        <li><i></i><div><b>Seu catálogo.</b> Embarcações e passeios com duração, capacidade e destinos.</div></li>
-      </ul>
+  <div class="wrap mid">
+    <div class="head">
+      <span class="chap up">Capítulo 04 — Para quem leva</span>
+      <h2><span class="ln"><span>O barco parado</span></span><span class="ln"><span><em>passa a ter agenda</em></span></span></h2>
+      <p class="lead up">Solicitação em tempo real com cliente, data e recado. Agenda do mês entre confirmadas e pendentes. Vento, onda e temperatura antes de sair.</p>
     </div>
-    <div class="shots rev">
+    <div class="fan" id="fan2">
       <img src="assets/barqueiro-reservas.webp" width="460" height="880" alt="Reservas do barqueiro">
       <img src="assets/barqueiro-condicoes.webp" width="460" height="877" alt="Condições marítimas">
       <img src="assets/barqueiro-agenda.webp" width="460" height="867" alt="Agenda de reservas">
@@ -268,28 +297,28 @@ footer{border-top:1px solid var(--line);padding:40px 0 52px;color:var(--mut);fon
 
 <section class="modelo">
   <div class="wrap">
-    <span class="eyebrow rev">O modelo</span>
-    <h2 class="rev">O dinheiro não passa pelo app</h2>
-    <p class="rev">O valor é combinado diretamente com o barqueiro. A MarGo é plataforma de divulgação: conecta, organiza e dá reputação — não intermedeia o pagamento e não fica com um pedaço do mar.</p>
+    <span class="chap up">O modelo</span>
+    <h2><span class="ln"><span>O dinheiro não</span></span><span class="ln"><span>passa pelo app</span></span></h2>
+    <p class="up">O valor é combinado diretamente com o barqueiro. A MarGo é plataforma de divulgação: conecta, organiza e dá reputação — não intermedeia o pagamento e não fica com um pedaço do mar.</p>
   </div>
 </section>
 
 <section class="costa">
   <div class="wrap">
-    <div class="num rev">7.491 km<small>DE COSTA BRASILEIRA</small></div>
-    <p class="rev">De norte a sul o cenário se repete: barco de um lado, quem quer navegar do outro, e nada no meio. A MarGo nasce em Caraguatatuba para ser esse meio — e foi feita para rodar em qualquer litoral do país.</p>
+    <div class="num up"><span id="km">7.491</span> km<small>DE COSTA BRASILEIRA</small></div>
+    <p class="up">De norte a sul o cenário se repete: barco de um lado, quem quer navegar do outro, e nada no meio. A MarGo nasce em Caraguatatuba para ser esse meio — e foi feita para rodar em qualquer litoral do país.</p>
   </div>
 </section>
 
 <section id="contato">
   <div class="wrap">
-    <div class="final rev">
-      <span class="pill"><i></i> Aplicativo em construção</span>
-      <h2>Entre na primeira leva</h2>
-      <p>Os barqueiros que entrarem agora chegam ao lançamento com perfil montado, passeios cadastrados e as primeiras avaliações no currículo.</p>
-      <div class="cta">
-        <a class="btn btn-p" id="cta-wa" href="#">Quero ser barqueiro parceiro</a>
-        <a class="btn btn-g" id="cta-mail" href="#">Falar com a MarGo</a>
+    <div class="final">
+      <span class="pill up"><i></i> Aplicativo em construção</span>
+      <h2><span class="ln"><span>Entre na</span></span><span class="ln"><span><em>primeira leva</em></span></span></h2>
+      <p class="up">Os barqueiros que entrarem agora chegam ao lançamento com perfil montado, passeios cadastrados e as primeiras avaliações no currículo.</p>
+      <div class="cta up">
+        <a class="btn btn-p" id="ctaA" href="#">Quero ser barqueiro parceiro</a>
+        <a class="btn btn-g" id="ctaB" href="#">Falar com a MarGo</a>
       </div>
     </div>
   </div>
@@ -305,22 +334,117 @@ footer{border-top:1px solid var(--line);padding:40px 0 52px;color:var(--mut);fon
   </div>
 </footer>
 
+<script src="vendor/lenis.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
 <script>
-document.getElementById('y').textContent=new Date().getFullYear();
-const hd=document.getElementById('hd');
-addEventListener('scroll',()=>hd.classList.toggle('on',scrollY>8),{passive:true});
+(function(){
+  document.getElementById('y').textContent = new Date().getFullYear();
+  var hd = document.getElementById('hd');
+  var calmo = !matchMedia('(prefers-reduced-motion: no-preference)').matches;
 
-if(matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window){
-  const io=new IntersectionObserver((es)=>{
-    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  },{rootMargin:'0px 0px -12% 0px'});
-  document.querySelectorAll('.rev').forEach((el,i)=>{
-    el.style.transitionDelay=(Math.min(i%4,3)*70)+'ms';
+  /* ---- rolagem suave (Lenis), se disponível ---- */
+  var lenis = null;
+  if (!calmo && window.Lenis) {
+    lenis = new Lenis({ duration:1.05, smoothWheel:true, touchMultiplier:1.6 });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var alvo = document.querySelector(a.getAttribute('href'));
+        if (alvo) { e.preventDefault(); lenis.scrollTo(alvo, { offset:-68 }); }
+      });
+    });
+  }
+
+  function aoRolar(){ hd.classList.toggle('on', (window.scrollY||0) > 10); }
+  addEventListener('scroll', aoRolar, {passive:true}); aoRolar();
+
+  /* ---- sem movimento: mostra tudo e para por aqui ---- */
+  if (calmo) {
+    document.querySelectorAll('.ln,.up').forEach(function(e){ e.classList.add('in'); });
+    return;
+  }
+
+  /* ---- entradas ---- */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin:'0px 0px -10% 0px', threshold:.1 });
+
+  document.querySelectorAll('.ln').forEach(function(el,i){
+    el.querySelector('span').style.transitionDelay = (i%2)*110 + 'ms';
     io.observe(el);
   });
-}else{
-  document.querySelectorAll('.rev').forEach(e=>e.classList.add('in'));
-}
+  document.querySelectorAll('.up').forEach(function(el){ io.observe(el); });
+
+  /* o hero entra sozinho, sem esperar rolagem */
+  requestAnimationFrame(function(){
+    document.querySelectorAll('.hero .ln,.hero .up').forEach(function(el,i){
+      setTimeout(function(){ el.classList.add('in'); }, 120 + i*110);
+    });
+  });
+
+  if (!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  if (lenis) { lenis.on('scroll', ScrollTrigger.update); }
+
+  /* ---- mar do hero: paralaxe + aproximação ---- */
+  gsap.to('#heroBg img', {
+    yPercent: 14, scale: 1.12, ease:'none',
+    scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true }
+  });
+
+  /* ---- celular do hero sobe e endireita ---- */
+  gsap.fromTo('#heroPhone',
+    { yPercent: 16, rotate: -3.5, opacity: 0 },
+    { yPercent: -4, rotate: 0, opacity: 1, ease:'none',
+      scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom center', scrub:.6 } });
+
+  /* ---- trilha dos passos: linha que preenche + pontos que acendem ---- */
+  var fill = document.getElementById('trackFill');
+  if (fill) {
+    gsap.to(fill, { height:'100%', ease:'none',
+      scrollTrigger:{ trigger:'#track', start:'top 72%', end:'bottom 62%', scrub:.4 } });
+    gsap.utils.toArray('.stp').forEach(function(s){
+      ScrollTrigger.create({ trigger:s, start:'top 70%',
+        onEnter:function(){ s.classList.add('lit'); },
+        onLeaveBack:function(){ s.classList.remove('lit'); } });
+    });
+  }
+
+  /* ---- cena da lancha: aproxima e a frase respira ---- */
+  gsap.fromTo('#cineShot img', { scale:1.22, yPercent:-4 }, { scale:1, yPercent:4, ease:'none',
+    scrollTrigger:{ trigger:'#cine', start:'top bottom', end:'bottom top', scrub:true } });
+  gsap.fromTo('#cineSay', { opacity:0, y:34, filter:'blur(7px)' },
+    { opacity:1, y:0, filter:'blur(0px)', ease:'power2.out',
+      scrollTrigger:{ trigger:'#cine', start:'top 42%', end:'top -6%', scrub:.8 } });
+
+  /* ---- telas do app: abrem em leque ---- */
+  ['#fan1','#fan2'].forEach(function(sel){
+    var imgs = gsap.utils.toArray(sel + ' img');
+    if (!imgs.length) return;
+    gsap.fromTo(imgs,
+      { y:70, opacity:0, rotate:function(i){ return (i-1)*2.6; }, scale:.94 },
+      { y:function(i){ return i===1 ? -26 : 0; }, opacity:1, rotate:function(i){ return (i-1)*1.6; }, scale:1,
+        ease:'power3.out', stagger:.1,
+        scrollTrigger:{ trigger:sel, start:'top 85%', end:'top 45%', scrub:.7 } });
+  });
+
+  /* ---- 7.491 conta até o número ---- */
+  var km = document.getElementById('km');
+  if (km) {
+    var alvo = { v:0 };
+    ScrollTrigger.create({ trigger:'.costa', start:'top 78%', once:true, onEnter:function(){
+      gsap.to(alvo, { v:7491, duration:1.9, ease:'power2.out', onUpdate:function(){
+        km.textContent = Math.round(alvo.v).toLocaleString('pt-BR');
+      }});
+    }});
+  }
+})();
 </script>
 </body>
 </html>

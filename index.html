@@ -165,14 +165,34 @@ section{padding:clamp(78px,11vh,128px) 0;scroll-margin-top:var(--nav);position:r
 }
 
 /* cena da lancha */
-.cine{position:relative;height:230vh}
-.cine .stick{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:end center;padding-bottom:13vh}
+.cine{position:relative;height:320vh}
+.cine .stick{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr) auto;justify-items:center;align-items:center;
+  padding:calc(var(--nav) + 3vh) 0 6vh;row-gap:2.2vh}
 .cine .shot{position:absolute;inset:0}
 .cine .shot img{width:100%;height:100%;object-fit:cover}
 .cine .veil{position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0,rgba(6,23,38,.16) 24%,rgba(6,23,38,.6) 74%,var(--bg) 100%)}
-.cine .say{position:relative;z-index:2;text-align:center;max-width:20ch;margin-inline:auto;
-  font-size:clamp(28px,4.4vw,56px);font-weight:200;line-height:1.1;letter-spacing:-.03em;
+.cine .say{position:relative;z-index:2;text-align:center;max-width:20ch;margin-inline:auto;grid-row:1;
+  font-size:clamp(26px,4vw,52px);font-weight:200;line-height:1.1;letter-spacing:-.03em;
   text-shadow:0 4px 30px rgba(6,23,38,.95)}
+.cine .cine-phone{grid-row:2;position:relative;z-index:2;height:100%;max-height:560px;width:auto;aspect-ratio:460/930;max-width:62vw;align-self:center}
+.cine .cine-phone .glass{aspect-ratio:460/884}
+.cine .cine-phone .scr{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.cine .cine-phone .scr:first-child{opacity:1}
+.cine .cine-cap{grid-row:3;position:relative;z-index:2;text-align:center;width:min(92vw,520px);min-height:92px;display:grid;justify-items:center;align-content:start;gap:10px}
+.cine .cine-cap .pill{margin:0}
+.cine .cine-cap .cap-i{grid-area:3/1;text-align:center;opacity:0;text-shadow:0 2px 18px rgba(6,23,38,.95)}
+.cine .cine-cap .cap-i:first-of-type{opacity:1}
+.cine .cine-cap .pill{grid-area:1/1}
+.cine .cine-cap .cap-i{grid-area:2/1}
+.cine .cine-cap h3{font-weight:500;font-size:clamp(18px,2.2vw,24px)}
+.cine .cine-cap p{font-weight:300;color:#C9DAE8;font-size:clamp(14px,1.3vw,16px);line-height:1.5;margin-top:4px}
+@media(min-width:900px){
+  .cine .stick{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;padding:calc(var(--nav) + 4vh) clamp(24px,6vw,110px) 6vh;column-gap:6vw;justify-items:start}
+  .cine .say{grid-column:1;grid-row:1;align-self:end;text-align:left;margin:0;max-width:14ch}
+  .cine .cine-cap{grid-column:1;grid-row:2;text-align:left;justify-items:start;align-self:start;width:min(100%,440px)}
+  .cine .cine-cap .cap-i{text-align:left}
+  .cine .cine-phone{grid-column:2;grid-row:1/3;justify-self:center;max-height:min(86svh,720px);max-width:none}
+}
 
 /* telas do app em mockups */
 .fan{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,26px);
@@ -296,6 +316,20 @@ footer{border-top:1px solid var(--line);padding:42px 0 54px;color:var(--mut);fon
     <div class="shot" id="cineShot"><img src="assets/boat.webp" alt="Lancha cortando o mar aberto"></div>
     <div class="veil"></div>
     <p class="say" id="cineSay">O app vira <b>o passeio</b></p>
+    <div class="dev cine-phone" id="cinePhone"><span class="ear"></span><span class="cam"></span><span class="vol"></span><span class="pwr"></span>
+      <div class="glass">
+        <img class="scr" src="assets/cliente-explorar.webp" width="460" height="884" alt="Tela Explorar passeios do app MarGo">
+        <img class="scr" src="assets/cliente-barqueiros.webp" width="460" height="884" alt="Tela Barqueiros disponíveis">
+        <img class="scr" src="assets/cliente-reservas.webp" width="460" height="884" alt="Tela Minhas reservas">
+        <img class="scr" src="assets/cliente-avaliar.webp" width="460" height="884" alt="Tela Avaliar passeio">
+      </div><span class="home"></span></div>
+    <div class="cine-cap" id="cineCap">
+      <span class="pill"><i></i> Aplicativo em construção</span>
+      <div class="cap-i"><h3>Explore passeios</h3><p>Escolha o destino e veja o que sai da sua região.</p></div>
+      <div class="cap-i"><h3>Encontre o barqueiro</h3><p>Embarcação, capacidade e quem está disponível no dia.</p></div>
+      <div class="cap-i"><h3>Reserve com data e recado</h3><p>O pedido vai direto para o barqueiro confirmar.</p></div>
+      <div class="cap-i"><h3>Depois, avalie</h3><p>Cada passeio deixa histórico para o próximo turista.</p></div>
+    </div>
   </div>
 </div>
 
@@ -471,6 +505,22 @@ footer{border-top:1px solid var(--line);padding:42px 0 54px;color:var(--mut);fon
   gsap.fromTo('#cineSay', { opacity:0, y:34, filter:'blur(7px)' },
     { opacity:1, y:0, filter:'blur(0px)', ease:'power2.out',
       scrollTrigger:{ trigger:'#cine', start:'top 42%', end:'top -6%', scrub:.8 } });
+
+  (function(){
+    var ph=document.getElementById('cinePhone'); if(!ph) return;
+    var scr=gsap.utils.toArray('#cinePhone .scr'), cap=gsap.utils.toArray('#cineCap .cap-i');
+    gsap.set(scr.slice(1),{opacity:0}); gsap.set(cap,{opacity:0,y:0}); gsap.set(cap[0],{opacity:0});
+    var tl=gsap.timeline({ scrollTrigger:{ trigger:'#cine', start:'top top', end:'bottom bottom', scrub:.6 } });
+    tl.fromTo(ph,{ yPercent:55, opacity:0, rotate:-4, scale:.92 },{ yPercent:0, opacity:1, rotate:0, scale:1, ease:'power3.out', duration:.9 },0);
+    tl.fromTo(cap[0],{ opacity:0, y:18 },{ opacity:1, y:0, duration:.4 },.6);
+    for(var i=1;i<scr.length;i++){
+      var t=1.5+(i-1)*1.05;
+      tl.to(scr[i],{ opacity:1, duration:.4 },t);
+      tl.to(cap[i-1],{ opacity:0, y:-14, duration:.3 },t);
+      tl.fromTo(cap[i],{ opacity:0, y:18 },{ opacity:1, y:0, duration:.4 },t+.2);
+    }
+    tl.to({},{ duration:.6 });
+  })();
 
   ['#fan1','#fan2'].forEach(function(sel){
     var devs = gsap.utils.toArray(sel + ' .dev');
